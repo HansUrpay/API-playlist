@@ -1,0 +1,37 @@
+{
+  "devDependencies": {
+    "@types/express": "^4.17.15",
+    "@types/node": "^18.11.18",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.9.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "init": "^0.1.2",
+    "prisma": "^4.9.0"
+  },
+  "name": "proyecto_nodejs_express",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HansUrpay/Proyecto_NodeJS_Express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HansUrpay/Proyecto_NodeJS_Express/issues"
+  },
+  "homepage": "https://github.com/HansUrpay/Proyecto_NodeJS_Express#readme"
+}
