@@ -6,5 +6,6 @@ const user_router = Router();
 
 user_router.get("/users", users.get_users);
 user_router.post("/users_add", users.create_users);
+user_router.post("/login", users.login);
 
 export default user_router;
