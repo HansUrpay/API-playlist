@@ -36,7 +36,7 @@ export const create_users = async (
       },
     });
     res.status(200).json({
-      ok: true,
+      ok: "Successfully created",
       data: user,
     });
   } catch (error) {
