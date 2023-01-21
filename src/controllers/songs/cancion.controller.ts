@@ -56,3 +56,19 @@ export const store = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ ok: false, message: error });
     }
 };
+
+export const deletee = async (req: Request, res: Response): Promise<void> => {
+    try {
+    const id: number = parseInt(req.params.id);
+
+    const song = await prisma.song.delete({
+        where: {
+          id,
+        },
+      });
+
+    res.status(201).json({ ok: true, message: "Song Borrado correctamente" });
+    } catch (error) {
+    res.status(500).json({ ok: false, message: error });
+    }
+};
