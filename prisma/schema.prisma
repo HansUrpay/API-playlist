@@ -21,3 +21,19 @@ model User {
 
     @@map("users")
 }
+
+
+model Song {
+  id             Int     @id @default(autoincrement())
+  name           String
+  artist         String
+  album          String
+  year           Int
+  genre          String
+  duration       Int
+  created_at     DateTime @default(now())
+  update_at      DateTime @updatedAt
+
+
+  @@map("songs")
+}
