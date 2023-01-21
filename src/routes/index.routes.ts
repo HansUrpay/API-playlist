@@ -1,8 +1,2 @@
-import { Router } from "express";
-import user_router from "./users/user.routes";
-
-const router = Router();
-
-router.use("/api/v1", user_router);
-
-export default router;
+export { default as user_router } from "./users/user.routes";
+export { default as song_router } from "./songs/cancion.routes";

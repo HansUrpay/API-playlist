@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -20,4 +20,21 @@ model User {
     date_born DateTime @default(now())
 
     @@map("users")
+}
+
+
+model Song {
+  id             Int     @id @default(autoincrement())
+  name           String
+  artist         String
+  album          String
+  year           Int
+  genre          String
+  duration       Int
+  publico         Boolean 
+  created_at     DateTime @default(now())
+  update_at      DateTime @updatedAt
+
+
+  @@map("songs")
 }

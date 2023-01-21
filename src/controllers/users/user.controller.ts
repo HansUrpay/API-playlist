@@ -3,18 +3,20 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const get_users = async (req: Request, res: Response) => {
-console.log("Controller")    
-    try {
-      console.log("Try");
-    debugger;
-    const users = await prisma.user.findMany();
+export const get_users = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
+    });
     res.status(200).json({
       ok: true,
       data: users,
     });
-    } catch (error) {
-        console.log("Catch");
+  } catch (error) {
     res.status(500).json({
       ok: false,
       error: error,
@@ -22,7 +24,10 @@ console.log("Controller")
   }
 };
 
-export const create_users = async (req: Request, res: Response) => {
+export const create_users = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const { body } = req;
     const user = await prisma.user.create({
