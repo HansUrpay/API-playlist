@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+
 export const findAll = async (_req: Request, res: Response): Promise<void> => {
   try {
     const songs = await prisma.song.findMany();
@@ -10,6 +11,21 @@ export const findAll = async (_req: Request, res: Response): Promise<void> => {
     res.status(200).json({
       ok: true,
       data: songs,
+    });
+  } catch (error) {
+    res.status(500).json({ ok: false, message: error });
+  }
+};
+
+
+export const findOne = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const id: number = parseInt(req.params.id);
+    const song = await prisma.song.findFirst({ where: { id } });
+
+    res.status(200).json({
+      ok: true,
+      data: song,
     });
   } catch (error) {
     res.status(500).json({ ok: false, message: error });
