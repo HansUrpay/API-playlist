@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
@@ -51,9 +51,9 @@ export const get_users = async (req: Request, res: Response): Promise<void> => {
     error: error,
   });
   }
-  };
+  }; */
 
-export const login_users = async (
+/* export const login_users = async (
   _req: Request,
   res: Response
 ): Promise<void> => {
@@ -75,9 +75,7 @@ export const login_users = async (
       error,
     });
   }
-}; */
-
-
+};  */
 
 // const users = {
 //     get_users,
@@ -86,61 +84,83 @@ export const login_users = async (
 
 // export default users;
 
+export const create_users = async (req: Request, res: Response) => {
+    try {
+        interface User {
+          id: number;
+          name: string;
+          email: string;
+          password: string;
+          last_session: Date;
+          update_at: Date;
+          date_born: Date;
+        }
+    const { body } = req;
+    if (!body.email || !body.password) {
+      res.status(400).send("Username and password are required.");
+    }
+    const saltRounds: number = 5;
+    const myPlaintextPassword: string = body.password;
 
-export const login = async (req: Request, res: Response) => {
+    const salt = await bcrypt.genSalt(saltRounds);
+    const hash = await bcrypt.hash(myPlaintextPassword, salt);
+    body.password = hash;
 
-
-  try {
-
-  interface User {
-    id: number,
-    name: string,
-    email: string,
-    password: string,
-    last_session: Date,
-    update_at: Date,
-    date_born: Date
+    const user: User | null = await prisma.user.create({
+      data: body,
+    });
+    res.status(200).json({
+      ok: "Successfully created",
+      data: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      error,
+    });
   }
+};
 
-    
-  const { body } = req;
-  const user: User | null = await prisma.user.findFirst({ where: { email: body.email } });
+export const login = async (req: Request, res: Response): Promise<void> => {
+  try {
+    interface User {
+      id: number;
+      name: string;
+      email: string;
+      password: string;
+      last_session: Date;
+      update_at: Date;
+      date_born: Date;
+    }
 
-  if(user){
-    const isValid = await bcrypt.compare(body.password, user.password);
-    if(isValid) {
+    const { body } = req;
+    const user: User | null = await prisma.user.findFirst({
+      where: { email: body.email },
+    });
 
-      res.status(200).json({
-        ok: true,
-        data: "BIENVENIDO!",
-      });
-      
+    if (user) {
+      const isValid = await bcrypt.compare(body.password, user.password);
+      if (isValid) {
+        res.status(200).json({
+          ok: true,
+          data: "BIENVENIDO!",
+        });
+      } else {
+        res.status(500).json({
+          ok: false,
+          data: "Revisa tu contraseña",
+        });
+      }
     } else {
       res.status(500).json({
         ok: false,
-        data: "Revisa tu contraseña",
+        data: "Revisa tu correo",
       });
     }
-
-  }else {
+  } catch (error) {
     res.status(500).json({
       ok: false,
-      data: "Revisa tu correo",
+      error: error,
     });
   }
-
-  // const isValid = await bcrypt.compare(body.password, user.password);
-
-  //bcrypt.compare(body.password, user.password).then(function(result) {
-    // result == true
-  //});
-
-
-  } catch (error) {
-  res.status(500).json({
-    ok: false,
-    error: error,
-  });
-}
-  };
-  
+};

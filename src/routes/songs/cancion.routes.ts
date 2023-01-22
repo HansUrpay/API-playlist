@@ -1,4 +1,4 @@
-/* import { Router } from "express";
+import { Router } from "express";
 import { songs } from "../../controllers/index.controller";
 
 
@@ -11,4 +11,3 @@ song_router.post("/songs", songs.store);
 song_router.delete("/songs/:id", songs.deletee);
 
 export default song_router;
- */
