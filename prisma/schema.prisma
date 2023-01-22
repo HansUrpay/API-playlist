@@ -54,6 +54,7 @@ model Playlist {
 }
 
 model SongsOnPlaylist {
+  
   playlist      Playlist @relation(fields: [id_playlist], references: [id])
   id_playlist   Int
   songs         Song     @relation(fields: [id_song], references: [id])
