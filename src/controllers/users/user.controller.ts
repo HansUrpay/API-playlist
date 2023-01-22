@@ -1,21 +1,24 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from "bcrypt";
+import { generateToken } from "../../auth/auth";
 
 const prisma = new PrismaClient();
 
-export const get_users = async (req: Request, res: Response) => {
-  console.log("Controller")
+export const get_users = async (req: Request, res: Response): Promise<void> => {
   try {
-    console.log("Try");
-    debugger;
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
+    });
     res.status(200).json({
       ok: true,
       data: users,
     });
   } catch (error) {
-    console.log("Catch");
     res.status(500).json({
       ok: false,
       error: error,
@@ -25,95 +28,87 @@ export const get_users = async (req: Request, res: Response) => {
 
 export const create_users = async (req: Request, res: Response) => {
   try {
-
+    interface User {
+      id: number;
+      name: string;
+      email: string;
+      password: string;
+      last_session: Date;
+      update_at: Date;
+      date_born: Date;
+    }
+    // verificacion de email y password
     const { body } = req;
+    if (!body.email || !body.password) {
+      res.status(400).send("Username and password are required.");
+    }
+    // hash de password
     const saltRounds: number = 5;
-    const myPlaintextPassword: string = body.password;
-
     const salt = await bcrypt.genSalt(saltRounds);
-    const hash = await bcrypt.hash(myPlaintextPassword, salt);
+    const hash = await bcrypt.hash(body.password, salt);
     body.password = hash;
-
-
-    const user = await prisma.user.create({
-      data: {
-        ...body,
-      },
+    // creacion de usuario
+    const user: User | null = await prisma.user.create({
+      data: body,
     });
     res.status(200).json({
-      ok: true,
+      ok: "Successfully created",
       data: user,
     });
   } catch (error) {
     res.status(500).json({
       ok: false,
-      error: error,
+      error,
     });
   }
 };
 
-// const users = {
-//     get_users,
-//     create_users
-// }
-
-// export default users;
-
-
-export const login = async (req: Request, res: Response) => {
-
-
+export const login_users = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-
     interface User {
-      id: number,
-      name: string,
-      email: string,
-      password: string,
-      last_session: Date,
-      update_at: Date,
-      date_born: Date
+      id: number;
+      name: string;
+      email: string;
+      password: string;
+      last_session: Date;
+      update_at: Date;
+      date_born: Date;
     }
-
-
+    // busqueda de usuario por email
     const { body } = req;
-    const user: User | null = await prisma.user.findFirst({ where: { email: body.email } });
-
+    const user: User | null = await prisma.user.findFirst({
+      where: { email: body.email },
+    });
+    // validacion de usuario por password
     if (user) {
       const isValid = await bcrypt.compare(body.password, user.password);
       if (isValid) {
-
+        // generacion de token del usario
+        const token = generateToken(body.id);
         res.status(200).json({
           ok: true,
-          data: "BIENVENIDO!",
+          data: "Welcome!",
+          token,
         });
-
       } else {
         res.status(500).json({
           ok: false,
-          data: "Revisa tu contraseña",
+          data: "Incorrect password",
         });
       }
-
     } else {
       res.status(500).json({
         ok: false,
-        data: "Revisa tu correo",
+        data: "Incorrect email",
       });
     }
-
-    // const isValid = await bcrypt.compare(body.password, user.password);
-
-    //bcrypt.compare(body.password, user.password).then(function(result) {
-    // result == true
-    //});
-
-
   } catch (error) {
     res.status(500).json({
       ok: false,
-      error: error,
+      error,
     });
   }
 };
-

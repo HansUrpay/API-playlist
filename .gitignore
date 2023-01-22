@@ -108,3 +108,11 @@ dist
 
 # TernJS port file
 .tern-port
+
+#Database SQLite
+dev.db
+migrations
+dev.db-journal
+
+# Archivo de prueba
+prueba.ts
