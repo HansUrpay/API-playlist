@@ -37,20 +37,3 @@ export const createPlaylist = async (req: Request, res: Response) => {
     }
 };
 
-export const addSongsToPlaylist = async (req: Request, res: Response) => {
-    try {
-        const { playlistId, songId } = req.body;
-        await prisma.songsOnPlaylist.create({
-            data: {
-                playlist: { connect: { id: playlistId } },
-                songs: { connect: { id: songId } }
-            }
-        });
-        res.status(200).json({
-            ok: true,
-            message: "Songs added to playlist successfully"
-        });
-    } catch (error) {
-        res.status(500).json({ ok: false, message: error });
-    }
-};
