@@ -110,6 +110,7 @@ export const login_users = async (
       });
     }
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       ok: false,
       error,

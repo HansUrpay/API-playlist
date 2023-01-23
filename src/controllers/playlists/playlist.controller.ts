@@ -3,10 +3,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-
 export const findplaylist = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const playlists = await prisma.playlist.findMany();
+        const playlists = await prisma.playlist.findMany({
+            include: {SongsOnPlaylist: {include: {songs: true}}},
+        });
 
         res.status(200).json({
             ok: true,
@@ -16,6 +17,7 @@ export const findplaylist = async (_req: Request, res: Response): Promise<void> 
         res.status(500).json({ ok: false, message: error });
     }
 };
+
 
 export const createPlaylist = async (req: Request, res: Response) => {
     try {

@@ -2,12 +2,12 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -32,7 +32,7 @@ model Song {
   genre           String
   duration        Int
   publico         Boolean
-  playlist        Playlist[]
+  playlist        Playlist[]        
   created_at      DateTime          @default(now())
   update_at       DateTime          @updatedAt
   SongsOnPlaylist SongsOnPlaylist[]
@@ -45,8 +45,8 @@ model Playlist {
   id              Int               @id @default(autoincrement())
   name            String
   user            User              @relation(fields: [user_id], references: [id])
-  user_id          Int
-  songs           Song[]
+  user_id         Int
+  songs           Song[]            
   created_at      DateTime          @default(now())
   update_at       DateTime          @updatedAt
   SongsOnPlaylist SongsOnPlaylist[]
