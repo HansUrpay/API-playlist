@@ -26,7 +26,10 @@ export const get_users = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export const create_users = async (req: Request, res: Response) => {
+export const create_users = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     interface User {
       id: number;
@@ -52,7 +55,8 @@ export const create_users = async (req: Request, res: Response) => {
       data: body,
     });
     res.status(200).json({
-      ok: "Successfully created",
+      ok: true,
+      message: "Successfully created",
       data: user,
     });
   } catch (error) {
@@ -105,6 +109,61 @@ export const login_users = async (
         data: "Incorrect email",
       });
     }
+  } catch (error) {
+    res.status(500).json({
+      ok: false,
+      error,
+    });
+  }
+};
+
+export const update_users = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const id: number = Number(req.params.id);
+    const { body } = req;
+    // si usuario actualiza password se hace el hasheo
+    if (body.password) {
+      const saltRounds: number = 5;
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hash = await bcrypt.hash(body.password, salt);
+      body.password = hash;
+    }
+    // actualizacion de datos
+    const user = await prisma.user.update({
+      where: { id: id },
+      data: body,
+    });
+    res.status(200).json({
+      ok: true,
+      message: "Update successfully",
+      data: user,
+    });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      ok: false,
+      error,
+    });
+  }
+};
+
+export const delete_users = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+    // eliminacion de usuario buscando por id
+    await prisma.user.delete({
+      where: { id: Number(id) },
+    });
+    res.status(200).json({
+      ok: true,
+      message: "Deleted successfully",
+    });
   } catch (error) {
     res.status(500).json({
       ok: false,
