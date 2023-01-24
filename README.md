@@ -46,7 +46,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
     <http://localhost:9001/api/v1/users>
     
-    Con el formato
+    Con el formato JSON
     ```json
     {
     "name": "usuario",
@@ -58,7 +58,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
     <http://localhost:9001/api/v1/login>
 
-    Con el formato
+    Con el formato JSON
     ```json
     {
     "email": "usuario@gmail.com",
@@ -75,7 +75,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
     <http://localhost:9001/api/v1/users/id>
 
-    Y enviar algunos o todos los campos a actualizar, en el formato 
+    Y enviar algunos o todos los campos a actualizar, en el formato JSON
      ```json
     {
     "name": "usuario",
@@ -88,7 +88,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
 ### Playlist 🎧
 
-- Para agregar playlists(POST) ✔
+- Para agregar playlists (POST) ✔
 
     <http://localhost:9001/api/v1/playlist>
 
@@ -100,11 +100,11 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     "user_id": 1
     }
     ```
-- Para ver playlists(GET) 📋
+- Para ver playlists (GET) 📋
     
     <http://localhost:9001/api/v1/playlist>
 
-- Para eliminar playlist(DELETE) ❌
+- Para eliminar playlist (DELETE) ❌
     
     <http://localhost:9001/api/v1/playlist/:id>
 
@@ -114,7 +114,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
     <http://localhost:9001/api/v1/playlistadd>
 
-    Enviar los siguientes datos por el Body en formato Json
+    Enviar los siguientes datos por el body en formato JSON
 
     ```json
     {
@@ -122,25 +122,14 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     "id_playlist": 1
     }
     ```
-- Para ver las canciones de la playlist(GET) 📋
+- Para ver las canciones de la playlist (GET) 📋
 
     <http://localhost:9001/api/v1/playlistadd>
 
-- Para eliminar una canción de una playlist(DELETE) ❌
+- Para eliminar una canción de una playlist (DELETE) ❌
 
     <http://localhost:9001/api/v1/playlistadd/:id_playlist/song/:id_song>
 
-    ":id_playlist" es el id de la playlist donde se encuentra la canción
-    ":id_song" es el id de la canción a eliminar
-
-
+    ":id_playlist" es el id de la playlist donde se encuentra la canción.
     
-
-
-
-
-
-
-
-
-
+    ":id_song" es el id de la canción a eliminar.
