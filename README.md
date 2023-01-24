@@ -1,6 +1,34 @@
 # Proyecto_NodeJS_Express
 
-- Iniciando proyecto en TypeScript
+Este proyecto tiene como funciones realizar las operaciones CRUD de:
+1. Usuarios.
+2. Canciones.
+3. Playlists.
+Además de hacer `Login de usuario` y añadir canciones a las playlists.
+
+## Instalación y configuración
+
+- Instalar las depedencias del proyecto
+    ```bash
+    npm install
+    ```
+- Configurar las variables de entorno en el archivo `.env` en la raíz del proyecto con los parámetros
+    ```node
+    DATABASE_URL= "file:./dev.db"
+    
+    SECRET_KEY = "mysecretkey"
+    ```
+   Para mayor seguridad del `SECRET_KEY`, encriptarlo con la función de Node.
+
+   Ingresar al CLI de Node en el terminal
+   ```bash
+    node
+   ```
+    Ejecutar
+    ```bash
+    require("crypto").randomBytes(64).toString("hex")
+    ```
+    Esto nos dará una clave la cual usaremos como `SECRET_KEY`
 
 ## Instalacion de dependencias
 - Instalar TS y el tipado de TS
@@ -33,11 +61,7 @@
     ``` bash
     npm install --save @types/jsonwebtoken
     ```
-- Para mayor seguridad del SECRET_KEY que se usará en el .env, encriptarlo con requiere("crypto")
-    en la CLI de Node con `node` y ejecutar:
-    ```node
-    require("crypto").randomBytes(64).toString("hex")
-    ```
+
 - Instalar dotenv
     ```bash
     npm i dotenv
