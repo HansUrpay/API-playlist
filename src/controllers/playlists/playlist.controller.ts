@@ -43,6 +43,7 @@ export const createPlaylist = async (req: Request, res: Response) => {
         });
         res.status(201).json({
             ok: true,
+            message: 'Playlist created successfully',
             data: playlists,
         });
     } catch (error) {
@@ -92,7 +93,7 @@ export const addSongs = async (req: Request, res: Response) => {
         });
         res.status(201).json({
             ok: true,
-            message: "Canción agregada correctamente a la tabla SongsOnPlaylist",
+            message: "Song added succesfully to the playlist",
             data: songOnPlaylist,
         });
     } catch (error) {
@@ -111,7 +112,7 @@ export const deleteSongFromPlaylist = async (_req: Request, res: Response): Prom
         if (deletedSongOnPlaylist) {
             res.status(200).json({
                 ok: true,
-                message: `Song with id ${id_song} has been deleted from playlist with id ${id_playlist}.`,
+                message: `Song with id ${id_song} has been deleted from playlist ${id_playlist}.`,
             });
         } else {
             res.status(404).json({
