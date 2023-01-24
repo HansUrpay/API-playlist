@@ -7,8 +7,6 @@ const prisma = new PrismaClient();
 
 export const findAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-
-    //let songs = await prisma.song.findMany();
     let songs = await prisma.song.findMany({
       select: { 
           id: true,
@@ -41,8 +39,6 @@ export const findAll = async (req: Request, res: Response, next: NextFunction): 
     }else {
       verifyToken(req, res, next);
     }
-    console.log(authorization)
-
     res.status(200).json({
       ok: true,
       data: songs,

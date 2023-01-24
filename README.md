@@ -1,10 +1,11 @@
 # Proyecto_NodeJS_Express
 
-Este proyecto tiene como funciones realizar las operaciones CRUD de:
-1. Usuarios.
-2. Canciones.
-3. Playlists.
-Además de hacer `Login de usuario` y añadir canciones a las playlists.
+Con este proyecto puedes realizar operaciones CRUD de:
+1. Usuarios. 🧍
+2. Canciones. 🎵
+3. Playlists. 🎧
+
+Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
 ## Instalación y configuración
 
@@ -30,50 +31,66 @@ Además de hacer `Login de usuario` y añadir canciones a las playlists.
     ```
     Esto nos dará una clave la cual usaremos como `SECRET_KEY`
 
-## Instalacion de dependencias
-- Instalar TS y el tipado de TS
-    ```bash
-    npm install typescript ts-node @types/node --save-dev
-    ```
-    Iniciar TS
-    ```bash
-    npx tsc --init
-    ```
-- Instalar Prisma CLI
-    ```bash
-    npm install prisma --save-dev
-    ```
-
-## Implementacion de JWT
-- Instalar el paquete `jsonwebtoken`
-    ``` bash
-    npm install jsonwebtoken
-    ```
-    Instalar el tipado de "jsonwebtoken" en TS
-    ``` bash
-    npm install --save @types/jsonwebtoken
-    ```
-- Instalar `bcrypt` para el hasheo de password en el login
-    ```bash
-    npm install bcrypt
-    ```
-    Y para el tipado de "bcrypt" en TS
-    ``` bash
-    npm install --save @types/jsonwebtoken
-    ```
-
-- Instalar dotenv
-    ```bash
-    npm i dotenv
-    ```
-
-## SQLite como DB y migracion de tablas
-- Iniciar Prisma y establecer SQLite com DB del proyecto con:
-    ```bash
-    npx prisma init --datasource-provider sqlite
-    ```
-- Luego de crear los modelos hacer las migraciones con el comando:
+- Hacer las migraciones a la BD
     ```bash
     npx prisma migrate dev --name add_table
     ```
+- Activar el servidor en modo desarrollador
+    ```bash
+    npm run dev
+    ```
+## Funcionamiento
+
+### User
+- Crear usuarios (POST) en el endpoint 
+
+    <http://localhost:9001/api/v1/users>
+    
+    Con el formato
+    ```json
+    {
+    "name": "usuario",
+    "email": "usuario@gmail.com",
+    "password": "password"
+    }
+    ```
+- Login de usuarios (POST) en el endpoint
+
+    <http://localhost:9001/api/v1/login>
+
+    Con el formato
+    ```json
+    {
+    "email": "usuario@gmail.com",
+    "password": "password"
+    }
+    ```
+    Esto genera un token que se usará luego.
+
+- Obtener usuarios (GET) en el endpoint enviando el token en el headers
+
+    <http://localhost:9001/api/v1/users>
+
+- Para actualizar usuarios (PUT), enviar el id en el endpoint
+
+    localhost:9001/api/v1/users/id
+
+    Y enviar algunos o todos los campos a actualizar en el formato 
+     ```json
+    {
+    "name": "usuario",
+    "email": "usuario@gmail.com",
+    "password": "password"
+    }
+    ```
+
+
+
+
+
+
+
+
+
+
 
