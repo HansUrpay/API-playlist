@@ -73,7 +73,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
 - Para actualizar usuarios (PUT), enviar el id en el endpoint
 
-    <localhost:9001/api/v1/users/id>
+    <http://localhost:9001/api/v1/users/id>
 
     Y enviar algunos o todos los campos a actualizar en el formato 
      ```json
@@ -87,7 +87,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
 - Para agregar playlists(POST):
 
-    <localhost:9001/api/v1/playlist>
+    <http://localhost:9001/api/v1/playlist>
 
     Enviar los siguientes datos por el Body en formato Json
 
@@ -99,17 +99,17 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     ```
 - Para ver playlists(GET):
     
-    <localhost:9001/api/v1/playlist>
+    <http://localhost:9001/api/v1/playlist>
 
 - Para eliminar playlist(DELETE):
     
-    <localhost:9001/api/v1/playlist/:id>
+    <http://localhost:9001/api/v1/playlist/:id>
 
     Donde ":id" se reemplaza con el id de la playlist a eliminar
 
 - Para agregar canciones a la playlist (POST):
 
-    <localhost:9001/api/v1/playlistadd>
+    <http://localhost:9001/api/v1/playlistadd>
 
     Enviar los siguientes datos por el Body en formato Json
 
@@ -121,11 +121,11 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     ```
 - Para ver las canciones de la playlist(GET):
 
-    <localhost:9001/api/v1/playlistadd>
+    <http://localhost:9001/api/v1/playlistadd>
 
 - Para eliminar una canción de una playlist(DELETE):
 
-    <localhost:9001/api/v1/playlistadd/:id_playlist/song/:id_song>
+    <http://localhost:9001/api/v1/playlistadd/:id_playlist/song/:id_song>
 
     ":id_playlist" es el id de la playlist donde se encuentra la canción
     ":id_song" es el id de la canción a eliminar
