@@ -7,7 +7,7 @@ Con este proyecto puedes realizar operaciones CRUD de:
 
 Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
-## Instalación y configuración
+## Instalación y configuración 🛠️
 
 - Instalar las depedencias del proyecto
     ```bash
@@ -39,10 +39,10 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     ```bash
     npm run dev
     ```
-## Funcionamiento
+## Funcionamiento 
 
-### User
-- Crear usuarios (POST) en el endpoint 
+### User 🙋🏻‍♂️
+1. Creación de usuarios (POST) en el endpoint ✔️
 
     <http://localhost:9001/api/v1/users>
     
@@ -54,7 +54,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     "password": "password"
     }
     ```
-- Login de usuarios (POST) en el endpoint
+2. Login de usuarios (POST) en el endpoint ✔️
 
     <http://localhost:9001/api/v1/login>
 
@@ -67,15 +67,15 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     ```
     Esto genera un token que se usará luego.
 
-- Obtener usuarios (GET) en el endpoint enviando el token en el headers
+3. Obtener usuarios (GET) en el endpoint enviando el token en el headers 📜
 
     <http://localhost:9001/api/v1/users>
 
-- Para actualizar usuarios (PUT), enviar el id en el endpoint
+4. Actualizar usuarios (PUT) enviando su id en el endpoint y el token en el headers 🔃
 
     <http://localhost:9001/api/v1/users/id>
 
-    Y enviar algunos o todos los campos a actualizar en el formato 
+    Y enviar algunos o todos los campos a actualizar, en el formato 
      ```json
     {
     "name": "usuario",
@@ -83,6 +83,9 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     "password": "password"
     }
     ```
+5. Borrar usuarios (DELETE) en el endpoint enviando su id y el token en el headers ❌
+<http://localhost:9001/api/v1/users/id>
+
 ### Playlist 🎧
 
 - Para agregar playlists(POST) ✔
@@ -131,6 +134,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     ":id_song" es el id de la canción a eliminar
 
 
+    
 
 
 
