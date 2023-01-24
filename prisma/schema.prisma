@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model User {
   id           Int        @id @default(autoincrement())
   name         String
@@ -46,19 +47,18 @@ model Playlist {
   name            String
   user            User              @relation(fields: [user_id], references: [id])
   user_id         Int
-  songs           Song[]            
-  created_at      DateTime          @default(now())
-  update_at       DateTime          @updatedAt
-  SongsOnPlaylist SongsOnPlaylist[]
+  songs_list      Song              @relation(fields: [id], references: [id])       
+  song            SongsOnPlaylist[]
 
   @@map("playlists")
 }
 
 model SongsOnPlaylist {
-  
+  id            Int      @id @default(autoincrement())  
   playlist      Playlist @relation(fields: [id_playlist], references: [id])
   id_playlist   Int
-  songs         Song     @relation(fields: [id_song], references: [id])
+  datos         Song     @relation(fields: [id_song], references: [id])
   id_song       Int
-  assignedAt    DateTime @unique @default(now())
+
+  @@map("songonplaylist")
 }
