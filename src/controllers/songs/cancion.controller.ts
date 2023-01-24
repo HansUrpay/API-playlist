@@ -39,10 +39,12 @@ export const findAll = async (req: Request, res: Response, next: NextFunction): 
     }else {
       verifyToken(req, res, next);
     }
+    
     res.status(200).json({
       ok: true,
       data: songs,
     });
+
   } catch (error) {
     res.status(500).json({ ok: false, message: error });
   }
