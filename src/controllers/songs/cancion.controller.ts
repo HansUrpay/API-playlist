@@ -78,7 +78,7 @@ export const store = async (req: Request, res: Response): Promise<void> => {
       },
     });
 
-    res.status(201).json({ ok: true, message: "Song creado correctamente" });
+    res.status(201).json({ ok: true, message: "Song created correctly" });
   } catch (error) {
     res.status(500).json({ ok: false, message: error });
   }
@@ -96,7 +96,7 @@ export const modify = async (req: Request, res: Response): Promise<void> => {
 
     res
       .status(201)
-      .json({ ok: true, message: "Song actualizado correctamente" });
+      .json({ ok: true, message: "Song updated correctly" });
   } catch (error) {
     res.status(500).json({ ok: false, message: error });
   }
@@ -112,7 +112,7 @@ export const deletee = async (req: Request, res: Response): Promise<void> => {
       },
     });
 
-    res.status(201).json({ ok: true, message: "Song Borrado correctamente" });
+    res.status(201).json({ ok: true, message: "Song deleted correctly" });
   } catch (error) {
     res.status(500).json({ ok: false, message: error });
   }
