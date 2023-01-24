@@ -86,6 +86,70 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 5. Borrar usuarios (DELETE) en el endpoint enviando su id y el token en el headers ❌
 <http://localhost:9001/api/v1/users/id>
 
+
+
+# SONGS 
+Rutas para acceder a los metodos de las canciones
+
+- GET : Muestra las canciones.
+
+    Para los usuarios NO logeados se le mostrarán solo las      canciones públicas.
+
+    Para los usuarios logeados se mostrarán todas las canciones (públicas y privadas)
+
+    http://127.0.0.1:9001/api/v1/songs
+
+- GET por iD: Muestra una canción específica pasando su id. 
+
+    http://127.0.0.1:9001/api/v1/songs/:id
+
+- POST :Para crear una canción.
+
+    http://127.0.0.1:9001/api/v1/songs
+
+    body: 
+
+    ```json
+    {
+    "name": "Canción 1",
+    "artist": "Artista 1",
+    "album": "Album 1",
+    "year": 2020,
+    "genre": "Rock",
+    "duration": 120,
+    "publico": true
+    }
+    ```
+
+- PUT: Para actualizar una canción.
+
+    http://127.0.0.1:9001/api/v1/songs/:id
+
+    ```json
+    {
+    "name": "Canción 1",
+    "artist": "Artista 1",
+    "album": "Album 1",
+    "year": 2020,
+    "genre": "Rock",
+    "duration": 120,
+    "publico": true
+    }
+    ```
+
+- DELETE : Borrar una canción pasándole el ID
+    
+    Solo los usuarios logeados pueden borrar
+
+    http://127.0.0.1:9001/api/v1/songs/:id
+
+
+## ANOTACIÓN
+
+Cuando te logeas te brinda un TOKEN, con ese token podrás acceder a la ruta del GET para poder ver canciones públicas y privadas, también podrás acceder a la ruta del DELETE.
+
+
+
 ### Playlist 🎧
 
 - Para agregar playlists (POST) ✔
