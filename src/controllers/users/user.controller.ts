@@ -42,23 +42,26 @@ export const create_users = async (
     }
     // verificacion de email y password
     const { body } = req;
-    if (!body.email || !body.password) {
+    if (!(body.email.includes("@") && body.email.includes(".com"))) {
+      res.status(400).send("Incorrect email");
+    } else if (!body.email || !body.password) {
       res.status(400).send("Username and password are required.");
+    } else {
+      // hash de password
+      const saltRounds: number = 5;
+      const salt = await bcrypt.genSalt(saltRounds);
+      const hash = await bcrypt.hash(body.password, salt);
+      body.password = hash;
+      // creacion de usuario
+      const user: User | null = await prisma.user.create({
+        data: body,
+      });
+      res.status(200).json({
+        ok: true,
+        message: "Successfully created",
+        data: user,
+      });
     }
-    // hash de password
-    const saltRounds: number = 5;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hash = await bcrypt.hash(body.password, salt);
-    body.password = hash;
-    // creacion de usuario
-    const user: User | null = await prisma.user.create({
-      data: body,
-    });
-    res.status(200).json({
-      ok: true,
-      message: "Successfully created",
-      data: user,
-    });
   } catch (error) {
     res.status(500).json({
       ok: false,
@@ -110,7 +113,7 @@ export const login_users = async (
       });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       ok: false,
       error,

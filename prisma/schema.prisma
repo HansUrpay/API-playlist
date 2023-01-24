@@ -2,44 +2,43 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
 }
 
 
 model User {
-  id           Int        @id @default(autoincrement())
-  name         String
-  email        String     @unique
-  password     String
-  playlist     Playlist[]
-  last_session DateTime   @default(now())
-  update_at    DateTime   @updatedAt
-  date_born    DateTime   @default(now())
+    id           Int        @id @default(autoincrement())
+    name         String
+    email        String     @unique
+    password     String
+    playlist     Playlist[]
+    last_session DateTime   @default(now())
+    update_at    DateTime   @updatedAt
+    date_born    DateTime   @default(now())
 
-  @@map("users")
+    @@map("users")
 }
 
 model Song {
-  id              Int               @id @default(autoincrement())
-  name            String
-  artist          String
-  album           String
-  year            Int
-  genre           String
-  duration        Int
-  publico         Boolean
-  playlist        Playlist[]        
-  created_at      DateTime          @default(now())
-  update_at       DateTime          @updatedAt
-  SongsOnPlaylist SongsOnPlaylist[]
+    id              Int               @id @default(autoincrement())
+    name            String
+    artist          String
+    album           String
+    year            Int
+    genre           String
+    duration        Int
+    publico          Boolean           @default(true)
+    playlist        Playlist[]
+    created_at      DateTime          @default(now())
+    update_at       DateTime          @updatedAt
+    SongsOnPlaylist SongsOnPlaylist[]
 
-  @@map("songs")
-
+    @@map("songs")
 }
 
 model Playlist {
@@ -62,3 +61,4 @@ model SongsOnPlaylist {
 
   @@map("songonplaylist")
 }
+
