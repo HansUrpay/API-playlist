@@ -1,32 +1,16 @@
 import type { Request, Response, NextFunction } from "express";
 import { PrismaClient } from "@prisma/client";
-import { verifyToken } from "../../auth/auth";
+import { verifyToken} from "../../auth/auth";
 
 const prisma = new PrismaClient();
 
-export const findAll = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-): Promise<void> => {
+
+export const findAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
+
+    //let songs = await prisma.song.findMany();
     let songs = await prisma.song.findMany({
-      select: {
-        id: true,
-        name: true,
-        artist: true,
-        album: true,
-        year: true,
-        genre: true,
-        duration: true,
-        publico: true,
-      },
-    });
-    const { authorization } = req.headers;
-    if (!authorization) {
-      songs = await prisma.song.findMany({
-        where: { publico: true },
-        select: {
+      select: { 
           id: true,
           name: true,
           artist: true,
@@ -34,12 +18,31 @@ export const findAll = async (
           year: true,
           genre: true,
           duration: true,
-          publico: true,
-        },
-      });
-    } else {
+          publico: true
+      }
+  });
+    const { authorization } = req.headers;
+    if (!authorization){
+
+      songs = await prisma.song.findMany({ 
+        where: { publico: true },
+        select: { 
+            id: true,
+            name: true,
+            artist: true,
+            album: true,
+            year: true,
+            genre: true,
+            duration: true,
+            publico: true,
+        }
+    });
+
+    }else {
       verifyToken(req, res, next);
     }
+    console.log(authorization)
+
     res.status(200).json({
       ok: true,
       data: songs,
