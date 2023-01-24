@@ -83,9 +83,9 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     "password": "password"
     }
     ```
-### Playlist
+### Playlist 🎧
 
-- Para agregar playlists(POST):
+- Para agregar playlists(POST) ✔
 
     <http://localhost:9001/api/v1/playlist>
 
@@ -97,17 +97,17 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     "user_id": 1
     }
     ```
-- Para ver playlists(GET):
+- Para ver playlists(GET) 📋
     
     <http://localhost:9001/api/v1/playlist>
 
-- Para eliminar playlist(DELETE):
+- Para eliminar playlist(DELETE) ❌
     
     <http://localhost:9001/api/v1/playlist/:id>
 
     Donde ":id" se reemplaza con el id de la playlist a eliminar
 
-- Para agregar canciones a la playlist (POST):
+- Para agregar canciones a la playlist (POST) ✔
 
     <http://localhost:9001/api/v1/playlistadd>
 
@@ -119,11 +119,11 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     "id_playlist": 1
     }
     ```
-- Para ver las canciones de la playlist(GET):
+- Para ver las canciones de la playlist(GET) 📋
 
     <http://localhost:9001/api/v1/playlistadd>
 
-- Para eliminar una canción de una playlist(DELETE):
+- Para eliminar una canción de una playlist(DELETE) ❌
 
     <http://localhost:9001/api/v1/playlistadd/:id_playlist/song/:id_song>
 

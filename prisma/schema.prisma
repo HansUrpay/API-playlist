@@ -32,7 +32,6 @@ model Song {
   genre           String
   duration        Int
   publico         Boolean
-  playlist        Playlist[]
   created_at      DateTime          @default(now())
   update_at       DateTime          @updatedAt
   SongsOnPlaylist SongsOnPlaylist[]
@@ -45,8 +44,7 @@ model Playlist {
   name       String
   user       User              @relation(fields: [user_id], references: [id])
   user_id    Int
-  songs_list Song              @relation(fields: [id], references: [id])
-  song       SongsOnPlaylist[]
+  songs       SongsOnPlaylist[]
 
   @@map("playlists")
 }
@@ -55,7 +53,7 @@ model SongsOnPlaylist {
   id          Int      @id @default(autoincrement())
   playlist    Playlist @relation(fields: [id_playlist], references: [id])
   id_playlist Int
-  datos       Song     @relation(fields: [id_song], references: [id])
+  song       Song     @relation(fields: [id_song], references: [id])
   id_song     Int
 
   @@map("songonplaylist")

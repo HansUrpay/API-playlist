@@ -7,9 +7,9 @@ export const findplaylist = async (_req: Request, res: Response): Promise<void> 
     try {
         const playlists = await prisma.playlist.findMany({
             include: {
-                song: {
+                songs: {
                     select: {
-                        datos: {
+                        song: {
                             select: {
                                 id: true,
                                 name: true,
@@ -18,6 +18,7 @@ export const findplaylist = async (_req: Request, res: Response): Promise<void> 
                                 year: true,
                                 genre: true,
                                 duration: true,
+                                publico: true,
                             }
                         }
                     }
