@@ -46,7 +46,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
     <http://localhost:9001/api/v1/users>
     
-    Con el formato JSON
+    Enviar los datos en el body con formato JSON
     ```json
     {
     "name": "usuario",
@@ -58,7 +58,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
     <http://localhost:9001/api/v1/login>
 
-    Con el formato JSON
+    Enviar los datos en el body con formato JSON
     ```json
     {
     "email": "usuario@gmail.com",
@@ -73,9 +73,9 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
 4. Actualizar usuarios (PUT) enviando su id en el endpoint y el token en el headers 🔃
 
-    <http://localhost:9001/api/v1/users/id>
+    <http://localhost:9001/api/v1/users/:id>
 
-    Y enviar algunos o todos los campos a actualizar, en el formato JSON
+    Enviar en el body con formato JSON algunos o todos los campos a actualizar
      ```json
     {
     "name": "usuario",
@@ -83,8 +83,8 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
     "password": "password"
     }
     ```
-5. Borrar usuarios (DELETE) en el endpoint enviando su id y el token en el headers ❌
-<http://localhost:9001/api/v1/users/id>
+5. Eliminar usuarios (DELETE) en el endpoint enviando su id y el token en el headers ❌
+<http://localhost:9001/api/v1/users/:id>
 
 
 
