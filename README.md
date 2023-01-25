@@ -88,7 +88,7 @@ Además realizar `Login de usuario` y añadir canciones a las playlists creadas.
 
 
 
-# SONGS 
+### SONGS 
 Rutas para acceder a los metodos de las canciones
 
 - GET : Muestra las canciones.
@@ -144,7 +144,7 @@ Rutas para acceder a los metodos de las canciones
     http://127.0.0.1:9001/api/v1/songs/:id
 
 
-## ANOTACIÓN
+### ANOTACIÓN
 
 Cuando te logeas te brinda un TOKEN, con ese token podrás acceder a la ruta del GET para poder ver canciones públicas y privadas, también podrás acceder a la ruta del DELETE.
 
