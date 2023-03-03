@@ -1,6 +1,6 @@
-# Proyecto_NodeJS_Express
+# API Playlist
 
-Con este proyecto puedes realizar operaciones CRUD de:
+En este proyecto se ha usado Typescript, Express, Prisma, SQLite y permite realizar operaciones CRUD de:
 1. Usuarios. 🧍
 2. Canciones. 🎵
 3. Playlists. 🎧
