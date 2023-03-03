@@ -94,7 +94,7 @@ export const login_users = async (
       const isValid = await bcrypt.compare(body.password, user.password);
       if (isValid) {
         // generacion de token del usario
-        const token = generateToken(body.id);
+        const token = generateToken(user.id);
         res.status(200).json({
           ok: true,
           data: "Welcome!",
